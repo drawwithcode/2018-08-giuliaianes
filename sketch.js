@@ -11,12 +11,14 @@ var logo;
 var gameover = false;
 var bubbles = [];
 var splash = true;
+var mySong;
 
 function preload(){
   butthead=loadImage('./assets/butt.png');
   beavis=loadImage('./assets/beavis.png');
   titleCard=loadImage('./assets/inizio.png');
   logo=loadImage('./assets/titolo.png');
+  mySong = loadSound("./assets/beavbuttahh2.wav");
 }
 
 function setup() {
@@ -81,11 +83,13 @@ function draw() {
 
     if(intensity >= maxIntesity){
       gameover = true;
+      canPass=false;
       push();
       textSize(60);
       textAlign(CENTER);
       fill(255);
       text(currentPlayer + ' loses', width/2, height/2+100);
+      text('- tap to restart -', width/2, height/2+550);
       pop();
     }
 
@@ -126,7 +130,7 @@ function mousePressed() {
     if(!gameover){
       if(canPass){
         pass();
-        // && touchX>=width/4
+        mySong.play();
       }
     } else {
       reset();
